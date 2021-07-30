@@ -15,7 +15,7 @@ LEVEL 1:
 • Make an 8X8 grid and hard code mines in specific tiles in the grid. <b>Done</b>
 
 • Stepping on a mine would lead to the end of the game and stepping on
-safe grids would lead to an increment in the score.
+safe grids would lead to an increment in the score. <b>Done</b>
 
 • Make the device vibrate once you have stepped on a mine and signal
-game over.
+game over. <b>Done</b>
