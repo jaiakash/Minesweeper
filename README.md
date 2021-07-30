@@ -24,4 +24,4 @@ LEVEL 2:
 
 • Randomize the location of the mines.
 
-• Keep track of the high score, store it and display it accordingly.
+• Keep track of the high score, store it and display it accordingly. <b>Done</b>
