@@ -25,6 +25,7 @@ public class Game extends View {
         super(context);
 
         blockPaint.setStrokeWidth(10);
+        blockPaint.setColor(Color.WHITE);
         blockPaint.setStyle(Paint.Style.FILL);
         minePaint.setStrokeWidth(10);
         minePaint.setColor(Color.RED);
@@ -35,12 +36,12 @@ public class Game extends View {
 
 
         mTextPaint = new Paint(Paint.LINEAR_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setColor(Color.BLACK);
+        mTextPaint.setColor(Color.WHITE);
         mTextPaint.setTextSize(pxFromDp(context, 24));
 
         backgroundPaint = new Paint();
         backgroundPaint.setStyle(Paint.Style.FILL);
-        backgroundPaint.setColor(Color.YELLOW);
+        backgroundPaint.setColor(Color.BLACK);
 
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -70,7 +71,8 @@ public class Game extends View {
         }
 
 
-        canvas.drawText("Minesweeper", 10, 50, mTextPaint);
+        canvas.drawText("Score : 0", 30, 100, mTextPaint);
+        canvas.drawText("High Score : 0", 600, 100, mTextPaint);
 
     }
 
