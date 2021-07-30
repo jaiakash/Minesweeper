@@ -1,26 +1,14 @@
 package com.amostrone.akash.minessweeper;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Region;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-
-import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 public class Game extends View {
 
@@ -29,8 +17,20 @@ public class Game extends View {
     Paint blockPaint = new Paint();
     Paint minePaint = new Paint();
     Paint safePaint = new Paint();
+    int score=0;
 
-    RectF blockArray[][] = new RectF[8][8];//Assume these have been drawn in your draw method.
+    RectF[][] blockArray = new RectF[8][8];//Assume these have been drawn in your draw method.
+    boolean[][] isOpened = new boolean[8][8];
+    boolean[][] isMine = {
+            {true,false,false,false,false,false,false,false},//1
+            {false,true,false,false,false,false,false,false},//2
+            {false,false,true,false,false,false,false,false},//3
+            {false,false,false,true,false,false,false,false},//4
+            {false,false,false,false,true,false,false,false},//5
+            {false,false,false,false,false,true,false,false},//6
+            {false,false,false,false,false,false,true,false},//7
+            {false,false,false,false,false,false,false,true} //8
+            };
 
     public Game(Context context) {
         super(context);
@@ -56,6 +56,7 @@ public class Game extends View {
         int padding=250;
         for(int i=1;i<=8;i++) {
             for (int j = 0; j < 8; j++) {
+                isOpened[i-1][j]=false;
                 blockArray[i-1][j] = new RectF(j * 125 + 40, i*150+padding, j * 125 + 125, i*150+100+padding);
             }
         }
@@ -69,12 +70,21 @@ public class Game extends View {
 
         for(int i=1;i<=8;i++) {
             for (int j = 0; j < 8; j++){
-                canvas.drawRoundRect(blockArray[i-1][j],10,10,blockPaint);
+                if(!isOpened[i-1][j]){
+                    canvas.drawRoundRect(blockArray[i-1][j],10,10,blockPaint);
+                }
+                else{
+                    if(isMine[i-1][j]){
+                        canvas.drawRoundRect(blockArray[i-1][j],10,10,minePaint);
+                    }
+                    else {
+                        canvas.drawRoundRect(blockArray[i-1][j],10,10,safePaint);
+                    }
+                }
             }
         }
 
-
-        canvas.drawText("Score : 0", 30, 100, mTextPaint);
+        canvas.drawText("Score : "+score, 30, 100, mTextPaint);
         canvas.drawText("High Score : 1", 600, 100, mTextPaint);
 
     }
@@ -94,6 +104,15 @@ public class Game extends View {
                 for(int i=1;i<=8;i++) {
                     for (int j = 0; j < 8; j++) {
                         if(blockArray[i-1][j].contains(touchX,touchY)) {
+                            if(isMine[i-1][j]){
+                                Toast.makeText(getContext(), "Game Over, Your score is "+score, Toast.LENGTH_SHORT).show();
+                                score=0;
+                            }
+                            else {
+                                score++;
+                                isOpened[i-1][j]=true;
+                            }
+                            invalidate();
                             Log.i("Clicked", "Clicked Block i="+(i-1)+" j="+j);
                         }
                     }
