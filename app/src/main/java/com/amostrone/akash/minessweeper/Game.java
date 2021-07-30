@@ -11,33 +11,37 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Toast;
 
 public class Game extends View {
 
-    Paint mPaint, otherPaint, outerPaint, mTextPaint;
-    RectF mRectF;
-    int mPadding;
+    Paint backgroundPaint, mTextPaint;
+
+    Paint blockPaint = new Paint();
+    Paint minePaint = new Paint();
+    Paint safePaint = new Paint();
 
     public Game(Context context) {
         super(context);
 
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
+        blockPaint.setStrokeWidth(10);
+        blockPaint.setStyle(Paint.Style.FILL);
+        minePaint.setStrokeWidth(10);
+        minePaint.setColor(Color.RED);
+        minePaint.setStyle(Paint.Style.FILL);
+        safePaint.setStrokeWidth(10);
+        safePaint.setColor(Color.GREEN);
+        safePaint.setStyle(Paint.Style.FILL);
 
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.BLUE);
-        mPaint.setStrokeWidth(5);
 
         mTextPaint = new Paint(Paint.LINEAR_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setColor(Color.BLACK);
         mTextPaint.setTextSize(pxFromDp(context, 24));
 
-        otherPaint = new Paint();
-        outerPaint = new Paint();
-        outerPaint.setStyle(Paint.Style.FILL);
-        outerPaint.setColor(Color.YELLOW);
+        backgroundPaint = new Paint();
+        backgroundPaint.setStyle(Paint.Style.FILL);
+        backgroundPaint.setColor(Color.YELLOW);
 
-        mPadding = 100;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
 
@@ -49,7 +53,6 @@ public class Game extends View {
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
 
-        mRectF = new RectF(screenWidth / 4, screenHeight / 4, screenWidth / 6, screenHeight /6);
 
     }
 
@@ -57,18 +60,17 @@ public class Game extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        otherPaint.setColor(Color.RED);
-        otherPaint.setStyle(Paint.Style.FILL);
+        canvas.drawPaint(backgroundPaint);
 
-        canvas.drawRoundRect(mRectF, 10, 10, otherPaint);
-        canvas.clipRect(mRectF, Region.Op.DIFFERENCE);
-        canvas.drawPaint(outerPaint);
+        int padding=250;
+        for(int i=1;i<=8;i++) {
+            for (int j = 0; j < 8; j++) {
+                canvas.drawRoundRect(j * 125 + 40, i*150+padding, j * 125 + 125, i*150+100+padding, 10, 10, blockPaint);
+            }
+        }
 
-        canvas.drawRect(0,0,50,50,outerPaint);
 
-        canvas.drawRect(mPadding, mPadding+150, getWidth() - mPadding, getHeight() - mPadding, mPaint);
-
-        canvas.drawText("Minesweeper", (float) (getWidth() * 0.3), (float) (getHeight() * 0.8), mTextPaint);
+        canvas.drawText("Minesweeper", 10, 50, mTextPaint);
 
     }
 
