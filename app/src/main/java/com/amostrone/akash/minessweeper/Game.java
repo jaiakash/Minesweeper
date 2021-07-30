@@ -81,14 +81,15 @@ public class Game extends View {
         int temp=0;
         for(int i=1;i<=8;i++) {
             for (int j = 0; j < 8; j++) {
-                boolean t= Math.random() > 0.5;
-                if(t&&temp<=level*8){
-                    isMine[i-1][j]=true;
-                    temp++;
-                }
-                else {
-                    isMine[i-1][j]=false;
-                }
+                isMine[i-1][j]=false;
+            }
+        }
+        while(temp<level*8){
+            int x = ThreadLocalRandom.current().nextInt(0, 7 + 1);
+            int y = ThreadLocalRandom.current().nextInt(0, 7 + 1);
+            if(!isMine[x][y]){
+                temp++;
+                isMine[x][y]=true;
             }
         }
 
