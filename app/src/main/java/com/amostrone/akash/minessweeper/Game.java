@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -29,6 +30,8 @@ public class Game extends View {
     boolean[][] isOpened = new boolean[8][8];
     boolean[][] isMine = new boolean[8][8];
 
+    MediaPlayer mediaPlayer;
+
     public Game(Context context) {
         super(context);
 
@@ -49,6 +52,11 @@ public class Game extends View {
         backgroundPaint = new Paint();
         backgroundPaint.setStyle(Paint.Style.FILL);
         backgroundPaint.setColor(Color.BLACK);
+
+        //Music
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.background);
+        mediaPlayer.setLooping(true); // Set looping
+        mediaPlayer.setVolume(100, 100);
 
         restart();
     }
@@ -87,6 +95,8 @@ public class Game extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        mediaPlayer.start();
 
         canvas.drawPaint(backgroundPaint);
 

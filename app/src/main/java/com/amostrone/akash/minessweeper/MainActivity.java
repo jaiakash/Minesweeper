@@ -2,6 +2,9 @@ package com.amostrone.akash.minessweeper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
