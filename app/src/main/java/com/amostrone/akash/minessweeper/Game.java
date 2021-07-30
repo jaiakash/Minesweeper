@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -106,6 +107,12 @@ public class Game extends View {
                         if(blockArray[i-1][j].contains(touchX,touchY)) {
                             if(isMine[i-1][j]){
                                 Toast.makeText(getContext(), "Game Over, Your score is "+score, Toast.LENGTH_SHORT).show();
+
+                                // Get instance of Vibrator from current Context
+                                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                v.vibrate(400);
+
+                                // Setting score
                                 score=0;
                             }
                             else {
