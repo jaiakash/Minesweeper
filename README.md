@@ -19,3 +19,9 @@ safe grids would lead to an increment in the score. <b>Done</b>
 
 • Make the device vibrate once you have stepped on a mine and signal
 game over. <b>Done</b>
+
+LEVEL 2:
+
+• Randomize the location of the mines.
+
+• Keep track of the high score, store it and display it accordingly.
