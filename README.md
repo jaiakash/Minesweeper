@@ -28,10 +28,10 @@ LEVEL 2:
 
 LEVEL 3:
 
-• Add background music.
+• Add background music. <b>Done</b>
 
 • Upon clicking a non-mine tile, display a number on the tile that shows how
 many mines are around that particular tile.
 
 • Add difficulty levels to the app based on the number of bombs that are
-hidden.
+hidden.<b>Done</b>
