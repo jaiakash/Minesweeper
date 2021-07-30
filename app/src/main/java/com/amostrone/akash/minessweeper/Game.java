@@ -1,6 +1,7 @@
 package com.amostrone.akash.minessweeper;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class Game extends View {
 
     Paint backgroundPaint, mTextPaint;
@@ -19,6 +22,7 @@ public class Game extends View {
     Paint minePaint = new Paint();
     Paint safePaint = new Paint();
     int score=0;
+    int highScore=0;
 
     RectF[][] blockArray = new RectF[8][8];//Assume these have been drawn in your draw method.
     boolean[][] isOpened = new boolean[8][8];
@@ -67,7 +71,7 @@ public class Game extends View {
         }
 
         //Setting High Score
-
+        highScore = getHighscore();
     }
 
     @Override
@@ -93,7 +97,7 @@ public class Game extends View {
         }
 
         canvas.drawText("Score : "+score, 30, 100, mTextPaint);
-        canvas.drawText("High Score : 1", 600, 100, mTextPaint);
+        canvas.drawText("High Score "+highScore, 600, 100, mTextPaint);
 
     }
 
@@ -121,6 +125,8 @@ public class Game extends View {
                                 v.vibrate(400);
 
                                 // Setting score and high score
+                                setHighScore(score);
+                                highScore=getHighscore();
                                 score=0;
                             }
                             else {
@@ -141,6 +147,29 @@ public class Game extends View {
                 break;
         }
         return true;
+    }
+
+    public void setHighScore(int h){
+
+        SharedPreferences sharedPref = getContext().getSharedPreferences("HighScore",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        int old_highScore = getHighscore();
+
+        if(h>old_highScore) {
+            editor.putInt("HighScore", h);
+            editor.apply();
+        }
+    }
+
+    public int getHighscore(){
+
+        SharedPreferences sharedPref = getContext().getSharedPreferences("HighScore",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        int defaultValue = 0;
+        int old_highScore = sharedPref.getInt("HighScore", defaultValue);
+        return old_highScore;
     }
 
 }
