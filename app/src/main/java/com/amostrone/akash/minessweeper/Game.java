@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+import android.os.Vibrator;
 
 public class Game extends View {
 
@@ -107,15 +108,17 @@ public class Game extends View {
                         if(blockArray[i-1][j].contains(touchX,touchY)) {
                             if(isMine[i-1][j]){
                                 Toast.makeText(getContext(), "Game Over, Your score is "+score, Toast.LENGTH_SHORT).show();
+                                isOpened[i-1][j]=true;
 
-                                // Get instance of Vibrator from current Context
-                                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                // Vibration
+                                Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                                 v.vibrate(400);
 
-                                // Setting score
+                                // Setting score and high score
                                 score=0;
                             }
                             else {
+                                // Increasing Score and marked block as open
                                 score++;
                                 isOpened[i-1][j]=true;
                             }
