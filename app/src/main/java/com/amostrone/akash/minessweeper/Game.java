@@ -54,6 +54,10 @@ public class Game extends View {
         backgroundPaint.setStyle(Paint.Style.FILL);
         backgroundPaint.setColor(Color.BLACK);
 
+        restart();
+    }
+
+    public void restart(){
         int padding=250;
         for(int i=1;i<=8;i++) {
             for (int j = 0; j < 8; j++) {
@@ -61,6 +65,9 @@ public class Game extends View {
                 blockArray[i-1][j] = new RectF(j * 125 + 40, i*150+padding, j * 125 + 125, i*150+100+padding);
             }
         }
+
+        //Setting High Score
+
     }
 
     @Override
