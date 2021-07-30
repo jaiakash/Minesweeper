@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class Game extends View {
@@ -25,6 +27,7 @@ public class Game extends View {
     Paint safePaint = new Paint();
     int score=0;
     int highScore=0;
+    int level=0;
 
     RectF[][] blockArray = new RectF[8][8];//Assume these have been drawn in your draw method.
     boolean[][] isOpened = new boolean[8][8];
@@ -58,6 +61,9 @@ public class Game extends View {
         mediaPlayer.setLooping(true); // Set looping
         mediaPlayer.setVolume(100, 100);
 
+        level=ThreadLocalRandom.current().nextInt(1, 4 + 1);
+
+
         restart();
     }
 
@@ -71,7 +77,7 @@ public class Game extends View {
         }
 
         //Level Var
-        int level=1;
+        level= ThreadLocalRandom.current().nextInt(1, 5);;
         int temp=0;
         for(int i=1;i<=8;i++) {
             for (int j = 0; j < 8; j++) {
@@ -117,7 +123,8 @@ public class Game extends View {
         }
 
         canvas.drawText("Score : "+score, 30, 100, mTextPaint);
-        canvas.drawText("High Score : "+highScore, 600, 100, mTextPaint);
+        canvas.drawText("Mines : "+level*8, 700,200, mTextPaint);
+        canvas.drawText("High Score : "+highScore, 700, 100, mTextPaint);
 
     }
 
