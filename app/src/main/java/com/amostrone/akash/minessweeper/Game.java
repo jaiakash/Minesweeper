@@ -34,7 +34,6 @@ public class Game extends View {
         safePaint.setColor(Color.GREEN);
         safePaint.setStyle(Paint.Style.FILL);
 
-
         mTextPaint = new Paint(Paint.LINEAR_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setColor(Color.WHITE);
         mTextPaint.setTextSize(pxFromDp(context, 24));
@@ -72,7 +71,7 @@ public class Game extends View {
 
 
         canvas.drawText("Score : 0", 30, 100, mTextPaint);
-        canvas.drawText("High Score : 0", 600, 100, mTextPaint);
+        canvas.drawText("High Score : 1", 600, 100, mTextPaint);
 
     }
 
