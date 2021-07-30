@@ -10,6 +10,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -41,7 +42,7 @@ public class Game extends View {
         super(context);
 
         blockPaint.setStrokeWidth(10);
-        blockPaint.setColor(Color.WHITE);
+        blockPaint.setColor(Color.GRAY);
         blockPaint.setStyle(Paint.Style.FILL);
         minePaint.setStrokeWidth(10);
         minePaint.setColor(Color.RED);
@@ -72,6 +73,8 @@ public class Game extends View {
 
         //Setting High Score
         highScore = getHighscore();
+
+        invalidate();
     }
 
     @Override
@@ -97,7 +100,7 @@ public class Game extends View {
         }
 
         canvas.drawText("Score : "+score, 30, 100, mTextPaint);
-        canvas.drawText("High Score "+highScore, 600, 100, mTextPaint);
+        canvas.drawText("High Score : "+highScore, 600, 100, mTextPaint);
 
     }
 
