@@ -53,17 +53,6 @@ public class Game extends View {
         backgroundPaint.setStyle(Paint.Style.FILL);
         backgroundPaint.setColor(Color.BLACK);
 
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-
-        ((Activity) getContext()).getWindowManager()
-                .getDefaultDisplay()
-                .getMetrics(displayMetrics);
-
-
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
-
         int padding=250;
         for(int i=1;i<=8;i++) {
             for (int j = 0; j < 8; j++) {
@@ -79,8 +68,8 @@ public class Game extends View {
         canvas.drawPaint(backgroundPaint);
 
         for(int i=1;i<=8;i++) {
-            for (int j = 0; j < 8; j++) {
-                canvas.drawRect(blockArray[i-1][j],blockPaint);
+            for (int j = 0; j < 8; j++){
+                canvas.drawRoundRect(blockArray[i-1][j],10,10,blockPaint);
             }
         }
 
