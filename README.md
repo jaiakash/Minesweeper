@@ -22,6 +22,6 @@ game over. <b>Done</b>
 
 LEVEL 2:
 
-• Randomize the location of the mines.
+• Randomize the location of the mines. <b>Done</b>
 
 • Keep track of the high score, store it and display it accordingly. <b>Done</b>
