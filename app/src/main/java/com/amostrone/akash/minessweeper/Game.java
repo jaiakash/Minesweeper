@@ -27,16 +27,7 @@ public class Game extends View {
 
     RectF[][] blockArray = new RectF[8][8];//Assume these have been drawn in your draw method.
     boolean[][] isOpened = new boolean[8][8];
-    boolean[][] isMine = {
-            {true,false,false,false,false,false,false,false},//1
-            {false,true,false,false,false,false,false,false},//2
-            {false,false,true,false,false,false,false,false},//3
-            {false,false,false,true,false,false,false,false},//4
-            {false,false,false,false,true,false,false,false},//5
-            {false,false,false,false,false,true,false,false},//6
-            {false,false,false,false,false,false,true,false},//7
-            {false,false,false,false,false,false,false,true} //8
-            };
+    boolean[][] isMine = new boolean[8][8];
 
     public Game(Context context) {
         super(context);
@@ -68,6 +59,22 @@ public class Game extends View {
             for (int j = 0; j < 8; j++) {
                 isOpened[i-1][j]=false;
                 blockArray[i-1][j] = new RectF(j * 125 + 40, i*150+padding, j * 125 + 125, i*150+100+padding);
+            }
+        }
+
+        //Level Var
+        int level=1;
+        int temp=0;
+        for(int i=1;i<=8;i++) {
+            for (int j = 0; j < 8; j++) {
+                boolean t= Math.random() > 0.5;
+                if(t&&temp<=level*8){
+                    isMine[i-1][j]=true;
+                    temp++;
+                }
+                else {
+                    isMine[i-1][j]=false;
+                }
             }
         }
 
