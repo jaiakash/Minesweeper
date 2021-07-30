@@ -25,3 +25,13 @@ LEVEL 2:
 • Randomize the location of the mines. <b>Done</b>
 
 • Keep track of the high score, store it and display it accordingly. <b>Done</b>
+
+LEVEL 3:
+
+• Add background music.
+
+• Upon clicking a non-mine tile, display a number on the tile that shows how
+many mines are around that particular tile.
+
+• Add difficulty levels to the app based on the number of bombs that are
+hidden.
