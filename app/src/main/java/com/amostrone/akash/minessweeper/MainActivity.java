@@ -2,9 +2,9 @@ package com.amostrone.akash.minessweeper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -29,8 +29,12 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
+                PackageManager packageManager = getApplicationContext().getPackageManager();
+                Intent intent = packageManager.getLaunchIntentForPackage(getApplicationContext().getPackageName());
+                ComponentName componentName = intent.getComponent();
+                Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+                getApplicationContext().startActivity(mainIntent);
+                Runtime.getRuntime().exit(0);
             }
         });
     }
